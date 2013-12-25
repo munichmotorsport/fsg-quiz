@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+$('.dropdown-menu').find('form').click(function (e) {
+    e.stopPropagation();
+  });
