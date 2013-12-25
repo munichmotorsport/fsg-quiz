@@ -47,7 +47,7 @@
           <a class="brand" href="/">FSG-Quiz</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Take Quiz", "/"  %></li>
+              <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
             </ul>
             <ul class="nav pull-right">
                 <% if user_signed_in? %>
@@ -89,6 +89,21 @@
             </ul>
           </div><!--/.nav-collapse -->
         </div>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="quizModal" class="modal hide fade" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Modal header</h3>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
       </div>
     </div>
 
