@@ -48,6 +48,9 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
+              <% if user_signed_in? && current_user.admin %>
+                <li><%= link_to "Create Question", "/questions/new" %></li>
+              <% end %>
             </ul>
             <ul class="nav pull-right">
                 <% if user_signed_in? %>
@@ -112,7 +115,7 @@
       <%= yield %>
       
       <footer>
-        <p class="ctext">&copy; <%= link_to "municHMotorsport", "http://www.munichmotorsport.de"%> 2013</p>
+        <p class="text-center">&copy; <%= link_to "municHMotorsport", "http://www.munichmotorsport.de"%> 2013</p>
       </footer>
 
     </div> <!-- /container -->
