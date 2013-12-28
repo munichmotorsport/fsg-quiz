@@ -2,35 +2,35 @@
   <div class="control-group">
     <%= f.label :content, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :content, :class => 'text_field' %>
+      <%= f.text_area :content, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :year, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :year, :class => 'text_field' %>
+      <%= f.select :year, options_for_select(["2013", "2012", "2011"]) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :category, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :category, :class => 'text_field' %>
+      <%= f.select :category, options_for_select(["Electric","Combustion"]) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :answers, :class => 'control-label' %>
     <div class="controls">
       <%= f.fields_for :answers do |a| %>
-        <%= a.text_field :content %>
-        <%= a.link_to_remove "Remove this answer" %>
+        <%= a.text_field :content, :style => "width: 60%;" %>
+        <%= a.check_box :correct %>
+        <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: middle; "%>
+        <%= a.link_to_remove "Remove Answer", :class => "btn pull-right" %>
       <% end %>
-      <p class="control-label form-horizontal"><%= f.link_to_add "Add an answer", :answers %></p>
+      <%= f.link_to_add "Add answer", :answers, :class => "btn" %>
     </div>
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <!-- <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                questions_path, :class => 'btn' %> -->
+    <%= f.submit "Create Question", :class => 'btn btn-primary' %>
   </div>
 <% end %>

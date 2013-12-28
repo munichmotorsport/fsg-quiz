@@ -10,6 +10,7 @@
       <th><%= model_class.human_attribute_name(:year) %></th>
       <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Answers</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
         <td><%= question.year %></td>
         <td><%= question.category %></td>
         <td><%=l question.created_at %></td>
+        <td><%= Answer.where(question_id: question.id).count %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_question_path(question), :class => 'btn btn-mini' %>
