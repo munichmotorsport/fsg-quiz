@@ -1,4 +1,6 @@
 FsgQuiz::Application.routes.draw do
+  resources :questions
+
   devise_for :views
   devise_for :users
   
