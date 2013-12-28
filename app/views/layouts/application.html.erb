@@ -47,18 +47,20 @@
           <a class="brand" href="/">FSG-Quiz</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
-              <% if user_signed_in? && current_user.admin %>
-                <li><%= link_to "Create Question", "/questions/new" %></li>
+              <% if user_signed_in? %>
+                <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
+                <% if current_user.admin%>
+                  <li><%= link_to "Create Question", "/questions/new" %></li>
+                <% end %>
               <% end %>
             </ul>
             <ul class="nav pull-right">
                 <% if user_signed_in? %>
-                  <li><%= link_to "My Profile", "/" %></li>
+                  <li><a href="#profileModal" data-toggle="modal">My Profile</a></li>
                   <li class="divider-vertical"></li>
                   <li><%= link_to("Logout", destroy_user_session_path, :method=>"delete") %></li> 
                 <% else %>
-                  <li><%= link_to "Sign up", "/users/sign_up" %></li>
+                  <li><a href="#signupModal" data-toggle="modal">Sign up</a></li>
                   <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       Login
@@ -95,18 +97,76 @@
       </div>
     </div>
     
-    <!-- Modal -->
+    <!-- quizModal -->
     <div id="quizModal" class="modal hide fade" tabindex="-1"
-    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    role="dialog" aria-labelledby="quizModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Modal header</h3>
+        <h3 id="quizModalLabel">Modal header</h3>
       </div>
       <div class="modal-body">
         <p>One fine body…</p>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+    
+    <!-- signupModal -->
+    <div id="signupModal" class="modal hide fade my-modal" tabindex="-1"
+    role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="signupModalLabel">Sign up</h3>
+      </div>
+      <div class="modal-body">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div><%= f.label :email %>
+          <%= f.email_field :email, :autofocus => true %></div>
+
+          <div><%= f.label :password %>
+          <%= f.password_field :password %></div>
+
+          <div><%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %></div>
+
+          <div><%= f.submit "Sign up" %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- profileModal -->
+    <div id="profileModal" class="modal hide fade" tabindex="-1"
+    role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="profileModalLabel">Edit Profile</h3>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 14px;"><i>You are logged in as <%= current_user.email %></i></p>
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+            <%= devise_error_messages! %>
+  
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+  
+            <div><%= f.label :password, "New Password", :class => "profile-label" %>
+            <%= f.password_field :password, :autocomplete => "off", :class => "profile-input" %></div>
+  
+            <div><%= f.label :password_confirmation, :class => "profile-label" %>
+            <%= f.password_field :password_confirmation, :class => "profile-input" %></div>
+  
+            <div><%= f.label :current_password, :class => "profile-label" %>
+            <%= f.password_field :current_password, :class => "profile-input", :style => "margin-bottom: 25px;"%></div>
+  
+            <div><%= f.submit "Update" %></div>
+          <% end %>
+
+        <p style="font-size: 14px;">Become admin? <%= button_to "Yes, please!", "/" %></p>
+        <p style="font-size: 14px;">Delete account? <%= button_to "Do it!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
       </div>
     </div>
 

@@ -10,6 +10,10 @@
   <dd><%= @question.year %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
   <dd><%= @question.category %></dd>
+  <dt><strong>Answers:</strong></dt>
+  <% Answer.where(question_id: @question.id).each do |a| %>
+    <dd><%= a.content %> (<%= if a.correct then "Correct" else "Wrong" end %>)</dd>
+  <% end%>
 </dl>
 
 <div class="form-actions">
