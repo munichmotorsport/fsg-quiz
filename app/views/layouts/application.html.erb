@@ -165,6 +165,9 @@
   
               <div><%= f.submit "Update" %></div>
             <% end %>
+            <div><%= label :master_password, "Master Password", :class => "profile-label" %>
+            <%= password_field :master_password, "Enter here", :class => "profile-input" %></div>
+          <p style="font-size: 14px;">Become admin? <%= button_to "Yes, please!", "welcome/index", :data => { :confirm => "Are you sure?" }, :method => :get %></p>
           <p style="font-size: 14px;">Delete account? <%= button_to "Do it!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
         <% else %>
           Sorry, you're not signed in.
