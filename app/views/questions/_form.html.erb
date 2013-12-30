@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :year, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :year, options_for_select(["2013", "2012", "2011"]) %>
+      <%= f.select :year, options_for_select(2006..Time.now.year, Time.now.year) %>
     </div>
   </div>
   <div class="control-group">
