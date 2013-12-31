@@ -57,11 +57,7 @@
             </ul>
             <ul class="nav pull-right">
                 <% if user_signed_in? %>
-<<<<<<< HEAD
-                  <li><a href="#profileModal" data-toggle="modal">My Profile</a></li>
-=======
                   <li><a href="#profileModal" data-toggle="modal">Profile</a></li>
->>>>>>> dev
                   <li class="divider-vertical"></li>
                   <li><%= link_to("Logout", destroy_user_session_path, :method=>"delete") %></li> 
                 <% else %>
