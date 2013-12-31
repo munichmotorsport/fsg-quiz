@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.text :content
       t.integer :year
       t.string :category
+      t.belongs_to :quiz, index: true
 
       t.timestamps
     end

@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :year, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :year, options_for_select(["2013", "2012", "2011"]) %>
+      <%= f.select :year, options_for_select(2006..Time.now.year, Time.now.year) %>
     </div>
   </div>
   <div class="control-group">
@@ -21,10 +21,10 @@
     <%= f.label :answers, :class => 'control-label' %>
     <div class="controls">
       <%= f.fields_for :answers do |a| %>
-        <%= a.text_field :content, :style => "width: 60%;" %>
+        <%= a.text_field :content, :style => "width: 60%; margin-bottom: 15px;" %>
         <%= a.check_box :correct %>
         <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: middle; "%>
-        <%= a.link_to_remove "Remove Answer", :class => "btn pull-right" %>
+        <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
       <% end %>
       <%= f.link_to_add "Add answer", :answers, :class => "btn" %>
     </div>
