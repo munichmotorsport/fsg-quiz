@@ -1,24 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Quiz -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Year:</strong>
-  <%= @quiz.year %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:year) %>:</strong></dt>
+  <dd><%= @quiz.year %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
+  <dd><%= @quiz.category %></dd>
+  <dt><strong>Questions:</strong></dt>
+  <% Question.where(quiz_id: @quiz.id).each do |a| %>
+    <dd><%= a.content %></dd>
+  <% end%>
+</dl>
 
-<p>
-  <strong>Category:</strong>
-  <%= @quiz.category %>
-</p>
-
-<p>
-  <strong>Started at:</strong>
-  <%= @quiz.started_at %>
-</p>
-
-<p>
-  <strong>Finished:</strong>
-  <%= @quiz.finished %>
-</p>
-
-<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
-<%= link_to 'Back', quizzes_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              quizzes_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_quiz_path(@quiz), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              quiz_path(@quiz),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
