@@ -70,18 +70,16 @@
                     <div class="dropdown-menu" role="menu" 
                     style="padding-top:20px; padding-left:15px; padding-right:15px;">
                       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-                        <div><%= f.label :email %>
+                        <div><%= f.label :email, :class => "signup-label" %>
                         <%= f.email_field :email, :autofocus => true %></div>
 
-                        <div><%= f.label :password %>
+                        <div><%= f.label :password, :class => "signup-label" %>
                         <%= f.password_field :password %></div>
 
                         <% if devise_mapping.rememberable? -%>
                           <div style="padding-bottom:15px;">
-                            <%= f.check_box :remember_me %>
-                            <p class="pull-right" style="position:relative; top:3px;">
-                              <%= f.label :remember_me %>
-                            </p>
+                            <%= f.label :remember_me, :class => "signup-label", :style => "display: inline; position: relative; top: 1px;" %>
+                            <%= f.check_box :remember_me, :class => "pull-right" %>
                         </div>
                         <% end -%>
 
@@ -124,14 +122,14 @@
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
 
-          <div><%= f.label :email %>
-          <%= f.email_field :email, :autofocus => true %></div>
+          <div><%= f.label :email, :class => "signup-label", :style => "left: 0px;" %>
+          <%= f.email_field :email, :autofocus => true, :class => "signup-input" %></div>
 
-          <div><%= f.label :password %>
-          <%= f.password_field :password %></div>
+          <div><%= f.label :password, :class => "signup-label", :style => "left: 0px;" %>
+          <%= f.password_field :password, :class => "signup-input" %></div>
 
-          <div><%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation %></div>
+          <div><%= f.label :password_confirmation, :class => "signup-label", :style => "left: 0px;" %>
+          <%= f.password_field :password_confirmation, :class => "signup-input" %></div>
 
           <div><%= f.submit "Sign up" %></div>
         <% end %>
@@ -147,7 +145,7 @@
       </div>
       <div class="modal-body">
         <% if user_signed_in? %>
-          <p style="font-size: 14px;"><i>You are signed in as <%= current_user.email %></i></p>
+          <p style="font-size: 14px;"><i>You are signed in as <%= current_user.email %>. You are <%= "not " unless current_user.admin %>an admin.</i></p>
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
               <%= devise_error_messages! %>
   

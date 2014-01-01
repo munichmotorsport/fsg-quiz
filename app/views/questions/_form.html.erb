@@ -6,24 +6,12 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :year, options_for_select(2006..Time.now.year, Time.now.year) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :category, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :category, options_for_select(["Electric","Combustion"]) %>
-    </div>
-  </div>
-  <div class="control-group">
     <%= f.label :answers, :class => 'control-label' %>
     <div class="controls">
       <%= f.fields_for :answers do |a| %>
         <%= a.text_field :content, :style => "width: 60%; margin-bottom: 15px;" %>
-        <%= a.check_box :correct %>
-        <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: middle; "%>
+        <%= a.radio_button :correct, true, :name => "correct_answer", :style => "vertical-align: top; position: relative; top: 5px;"%>
+        <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: top; position: relative; top: 4px;" %>
         <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
       <% end %>
       <%= f.link_to_add "Add answer", :answers, :class => "btn" %>

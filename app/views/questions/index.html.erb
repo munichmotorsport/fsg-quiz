@@ -7,8 +7,6 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:year) %></th>
-      <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th>Answers</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -18,8 +16,6 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= link_to question.id, question_path(question) %></td>
-        <td><%= question.content %></td>
-        <td><%= question.year %></td>
         <td><%= question.category %></td>
         <td><%=l question.created_at %></td>
         <td><%= Answer.where(question_id: question.id).count %>

@@ -16,6 +16,12 @@ body {
   padding-top: 55px;
 }
 
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
+}
+
 .padtext {
   padding-top: 15px;
   padding-bottom: 15px;

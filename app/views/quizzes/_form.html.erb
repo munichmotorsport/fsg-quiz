@@ -19,8 +19,8 @@
         <%= q.link_to_remove "Remove Question", :class => "btn pull-right", :style => "margin-right: 20px;" %>
         <%= q.fields_for :answers do |a| %>
           <%= a.text_field :content, :style => "width: 60%; margin-left: 25px; margin-bottom: 15px;" %>
-          <%= a.check_box :correct, :style => "vertical-align: top; position: relative; top: 4px;" %>
-          <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: top; position: relative; top: 4px;"%>
+          <%= a.check_box :correct, :style => "vertical-align: top; position: relative; top: 5px;" %>
+          <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: top; position: relative; top: 4px;" %>
           <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
         <% end %>
         <%= q.link_to_add "Add answer", :answers, :class => "btn", :style => "margin-left: 25px; margin-bottom: 15px;" %>

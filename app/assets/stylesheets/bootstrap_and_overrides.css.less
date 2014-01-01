@@ -43,10 +43,22 @@ textarea {
   .center;
 }
 
+@media (max-width: 979px) {
+  .signup-input {
+    width: 80%;
+    .center;
+  }
+}
+
 .profile-label {
   font-size: 10px;
   margin-bottom: 0;
   .center;
+}
+
+.signup-label {
+  font-size: 10px;
+  margin-bottom: 0;
 }
 
 input[type="submit"] {
@@ -70,6 +82,13 @@ select {
 body .my-modal {
   width: auto;
   margin-left: -8%;
+}
+
+@media (max-width: 979px) {
+  body .my-modal{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
 }
 
 .modal-body {

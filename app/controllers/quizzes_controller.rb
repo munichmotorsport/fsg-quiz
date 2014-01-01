@@ -75,7 +75,7 @@ class QuizzesController < ApplicationController
         :started_at, 
         :last_submit, 
         :finished, 
-        questions_attributes: [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct, :_destroy]]
+        :questions_attributes => [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct, :_destroy]]
       )
     end
 end

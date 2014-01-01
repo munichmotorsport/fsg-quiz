@@ -1,10 +1,23 @@
 <div class="hero-unit">
-  <h1>Welcome to the FSG-Quiz app!</h1>
-  <p class="padtext">This is the place to come if you want to practice for the FSG event registration. If you've found us, chances are you already know what the FSG registration quiz is and why you would want to practice for it. If you don't, click the link below. (You will see a page with two links, one for FSC, one for FSE registration - click the one you need for further information.)</p>
+  <h1 class="visible-desktop">Welcome to the FSG-Quiz app!</h1>
+  <h2 class="hidden-desktop">Welcome to the FSG-Quiz app!</h2>
+  <p class="padtext hidden-phone">
+    This is the place to come if you want to practice for the FSG event registration. If you've found us, chances are you already know what the FSG registration quiz is and why you would want to practice for it. If you don't, click the link below. (You will see a page with two links, one for FSC, one for FSE registration - click the one you need for further information.)
+  </p>
+  <p class="padtext visible-phone" style="font-size: 13px;">
+    This is the place to come if you want to practice for the FSG event registration. If you've found us, chances are you already know what the FSG registration quiz is and why you would want to practice for it. If you don't, click the link below. (You will see a page with two links, one for FSC, one for FSE registration - click the one you need for further information.)
+  </p>
   <p>
-    <a class="btn btn-primary btn-large pull-right"
+    <a class="btn btn-primary btn-large pull-right hidden-phone"
     href="http://www.formulastudent.de/fsg/pr/news/details/article/fsc-and-fse-registration-quiz-2014/"
-    target="FSGRegistration">
+    target="FSGRegistration"
+    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
+      FSG Registration Information
+    </a>
+    <a class="btn btn-primary btn-large text-center visible-phone"
+    href="http://www.formulastudent.de/fsg/pr/news/details/article/fsc-and-fse-registration-quiz-2014/"
+    target="FSGRegistration"
+    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
       FSG Registration Information
     </a>
   </p>
