@@ -1,0 +1,13 @@
+<%= simple_form_for(@quiztory) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :finished_at %>
+    <%= f.input :failed_submits %>
+    <%= f.association :quiz %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

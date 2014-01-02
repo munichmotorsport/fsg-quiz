@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230044003) do
+ActiveRecord::Schema.define(version: 20140102145532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,28 @@ ActiveRecord::Schema.define(version: 20131230044003) do
 
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
+  create_table "quiztories", force: true do |t|
+    t.time     "finished_at"
+    t.text     "failed_submits"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quiztories", ["quiz_id"], name: "index_quiztories_on_quiz_id", using: :btree
+
+  create_table "quiztories_users", id: false, force: true do |t|
+    t.integer "quiztory_id"
+    t.integer "user_id"
+  end
+
+  add_index "quiztories_users", ["quiztory_id"], name: "index_quiztories_users_on_quiztory_id", using: :btree
+  add_index "quiztories_users", ["user_id"], name: "index_quiztories_users_on_user_id", using: :btree
+
   create_table "quizzes", force: true do |t|
-    t.integer  "year"
+    t.date     "year"
     t.string   "category"
-    t.boolean  "production_ready"
+    t.boolean  "production_ready", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

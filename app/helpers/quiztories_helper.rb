@@ -1,0 +1,2 @@
+module QuiztoriesHelper
+end

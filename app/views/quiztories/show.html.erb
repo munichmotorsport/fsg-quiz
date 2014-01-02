@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Finished at:</strong>
+  <%= @quiztory.finished_at %>
+</p>
+
+<p>
+  <strong>Failed submits:</strong>
+  <%= @quiztory.failed_submits %>
+</p>
+
+<p>
+  <strong>Quiz:</strong>
+  <%= @quiztory.quiz %>
+</p>
+
+<%= link_to 'Edit', edit_quiztory_path(@quiztory) %> |
+<%= link_to 'Back', quiztories_path %>

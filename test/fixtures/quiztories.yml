@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  finished_at: 2014-01-02 15:44:03
+  failed_submits: MyText
+  quiz_id: 
+
+two:
+  finished_at: 2014-01-02 15:44:03
+  failed_submits: MyText
+  quiz_id: 

@@ -8,14 +8,19 @@
   <dd><%= @quiz.year %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
   <dd><%= @quiz.category %></dd>
-  <dt><strong>Questions:</strong></dt>
+  <br />
+  <% count = 1 %>
   <% Question.where(quiz_id: @quiz.id).each do |q| %>
+  <dt><strong>Question <%= count %>:</strong></dt>
     <dd><%= q.content %></dd>
     <dt><i>Answers:</i></dt>
     <% Answer.where(question_id: q.id).each do |a| %>
       <dd><%= a.content %><%= " -- Correct" if a.correct %></dd>
     <% end %>
+    <br />
+    <% count += 1 %>
   <% end%>
+  <br />
   <dt>Created at:</dt>
   <dd><%= @quiz.created_at %></dd>
 </dl>

@@ -1,0 +1,31 @@
+<h1>Listing quiztories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Finished at</th>
+      <th>Failed submits</th>
+      <th>Quiz</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quiztories.each do |quiztory| %>
+      <tr>
+        <td><%= quiztory.finished_at %></td>
+        <td><%= quiztory.failed_submits %></td>
+        <td><%= quiztory.quiz %></td>
+        <td><%= link_to 'Show', quiztory %></td>
+        <td><%= link_to 'Edit', edit_quiztory_path(quiztory) %></td>
+        <td><%= link_to 'Destroy', quiztory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quiztory', new_quiztory_path %>
