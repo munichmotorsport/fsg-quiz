@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(version: 20131230044003) do
 
   create_table "questions", force: true do |t|
     t.text     "content"
-    t.integer  "year"
-    t.string   "category"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -40,8 +38,7 @@ ActiveRecord::Schema.define(version: 20131230044003) do
   create_table "quizzes", force: true do |t|
     t.integer  "year"
     t.string   "category"
-    t.time     "started_at"
-    t.boolean  "finished"
+    t.boolean  "production_ready"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

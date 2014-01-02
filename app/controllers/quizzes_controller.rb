@@ -25,14 +25,21 @@ class QuizzesController < ApplicationController
   # POST /quizzes.json
   def create
     @quiz = Quiz.new(quiz_params)
+    
+    questions = Question.where(quiz_id: @quiz.id).count
+    correct_answers = Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count
 
     respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @quiz }
-      else
+      if @quiz.save && questions != correct_answers
+        flash.now[:alert] = "Every Question must have exactly one correct answer."
+        format.html { render action: 'edit' }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      elsif !@quiz.save
         format.html { render action: 'new' }
         format.json { render json: @quiz.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @quiz }
       end
     end
   end
@@ -41,10 +48,11 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1.json
   def update
     respond_to do |format|
-      if @quiz.update(quiz_params)
+      if @quiz.update(quiz_params) && (Question.where(quiz_id: @quiz.id).count == Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
         format.json { head :no_content }
       else
+        flash.now[:alert] = "Every Question must have exactly one correct answer."
         format.html { render action: 'edit' }
         format.json { render json: @quiz.errors, status: :unprocessable_entity }
       end
@@ -71,10 +79,8 @@ class QuizzesController < ApplicationController
     def quiz_params
       params.require(:quiz).permit(
         :year, 
-        :category, 
-        :started_at, 
-        :last_submit, 
-        :finished, 
+        :category,
+        :production_ready, 
         :questions_attributes => [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct, :_destroy]]
       )
     end

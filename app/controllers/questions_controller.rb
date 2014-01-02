@@ -27,12 +27,16 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @question }
-      else
+      if @question.save && Answer.where(question_id: @question.id).where(correct: true).count != 1
+        flash.now[:alert] = 'One answer can (and must) be correct for every question.'
+        format.html { render action: 'edit' }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      elsif !@question.save
         format.html { render action: 'new' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @question }
       end
     end
   end
@@ -41,10 +45,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1.json
   def update
     respond_to do |format|
-      if @question.update(question_params)
+      if @question.update(question_params) && !(Answer.where(question_id: @question.id).where(correct: true).count > 1)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { head :no_content }
       else
+        flash.now[:alert] = 'Only one answer can be correct for every question (or something went terribly wrong, which is less likely).'
         format.html { render action: 'edit' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end

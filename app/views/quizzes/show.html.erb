@@ -9,8 +9,12 @@
   <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
   <dd><%= @quiz.category %></dd>
   <dt><strong>Questions:</strong></dt>
-  <% Question.where(quiz_id: @quiz.id).each do |a| %>
-    <dd><%= a.content %></dd>
+  <% Question.where(quiz_id: @quiz.id).each do |q| %>
+    <dd><%= q.content %></dd>
+    <dt><i>Answers:</i></dt>
+    <% Answer.where(question_id: q.id).each do |a| %>
+      <dd><%= a.content %><%= " -- Correct" if a.correct %></dd>
+    <% end %>
   <% end%>
 </dl>
 

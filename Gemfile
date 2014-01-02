@@ -46,8 +46,9 @@ gem 'twitter-bootstrap-rails'
 gem 'devise'
 gem 'cancan'
 
-# Form magic to enter variable number of answers to questions
+# Form magic
 gem 'nested_form'
+gem 'simple_form'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

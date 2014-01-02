@@ -1,4 +1,4 @@
-<%= nested_form_for @quiz, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_nested_form_for @quiz, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <%= f.label :year, :class => 'control-label' %>
     <div class="controls">
@@ -28,8 +28,6 @@
       <%= f.link_to_add "Add Question", :questions, :class => "btn" %>
     </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-  </div>
+  <%= f.input :production_ready, :as => :boolean %>
+  <%= f.button :submit, :class => 'btn-primary' %>
 <% end %>

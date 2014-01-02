@@ -1,24 +1,19 @@
-<%= nested_form_for @question, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :content, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :content, :class => 'text_field' %>
-    </div>
-  </div>
+<%= simple_nested_form_for @question, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :content %>
   <div class="control-group">
     <%= f.label :answers, :class => 'control-label' %>
     <div class="controls">
-      <%= f.fields_for :answers do |a| %>
+      <%= f.simple_fields_for :answers do |a| %>
         <%= a.text_field :content, :style => "width: 60%; margin-bottom: 15px;" %>
-        <%= a.radio_button :correct, true, :name => "correct_answer", :style => "vertical-align: top; position: relative; top: 5px;"%>
+        <%= a.check_box :correct, :style => "vertical-align: top; position: relative; top: 5px;"%>
         <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: top; position: relative; top: 4px;" %>
         <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
       <% end %>
       <%= f.link_to_add "Add answer", :answers, :class => "btn" %>
     </div>
   </div>
-
+  
   <div class="form-actions">
-    <%= f.submit "Create Question", :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'btn btn-primary' %>
   </div>
 <% end %>

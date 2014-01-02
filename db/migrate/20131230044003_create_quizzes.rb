@@ -3,9 +3,7 @@ class CreateQuizzes < ActiveRecord::Migration
     create_table :quizzes do |t|
       t.integer :year
       t.string :category
-      t.time :started_at
-      t.time :last_submit
-      t.boolean :finished
+      t.boolean :production_ready, :default => false
 
       t.timestamps
     end
