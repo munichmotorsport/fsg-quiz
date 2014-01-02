@@ -25,12 +25,9 @@ class QuizzesController < ApplicationController
   # POST /quizzes.json
   def create
     @quiz = Quiz.new(quiz_params)
-    
-    questions = Question.where(quiz_id: @quiz.id).count
-    correct_answers = Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count
 
     respond_to do |format|
-      if @quiz.save && questions != correct_answers
+      if @quiz.save && (Question.where(quiz_id: @quiz.id).count != Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
         flash.now[:alert] = "Every Question must have exactly one correct answer."
         format.html { render action: 'edit' }
         format.json { render json: @question.errors, status: :unprocessable_entity }

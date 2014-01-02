@@ -1,4 +1,6 @@
 FsgQuiz::Application.routes.draw do
+  resources :quiztories
+
   resources :quizzes
 
   resources :questions

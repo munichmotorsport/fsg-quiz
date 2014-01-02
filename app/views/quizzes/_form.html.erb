@@ -1,32 +1,19 @@
 <%= simple_nested_form_for @quiz, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :year, options_for_select(2006..Time.now.year, Time.now.year) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :category, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :category, options_for_select(["Electric","Combustion"]) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :questions, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.fields_for :questions do |q| %>
-        <%= q.text_area :content, :style => "width: 70%; margin-bottom: 15px;" %>
-        <%= q.link_to_remove "Remove Question", :class => "btn pull-right", :style => "margin-right: 20px;" %>
-        <%= q.fields_for :answers do |a| %>
-          <%= a.text_field :content, :style => "width: 60%; margin-left: 25px; margin-bottom: 15px;" %>
-          <%= a.check_box :correct, :style => "vertical-align: top; position: relative; top: 5px;" %>
-          <%= a.label :correct_answer, "Correct", :style => "display: inline; vertical-align: top; position: relative; top: 4px;" %>
-          <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
-        <% end %>
-        <%= q.link_to_add "Add answer", :answers, :class => "btn", :style => "margin-left: 25px; margin-bottom: 15px;" %>
-      <% end %>
-      <%= f.link_to_add "Add Question", :questions, :class => "btn" %>
-    </div>
+  <%= f.input :year, :as => :date, :start_year => 2006, :end_year => Date.today.year, :discard_day => true, :discard_month => true %>
+  <%= f.input :category, :as => :radio_buttons, :collection => ["Electric", "Combustion"] %>
+  <%= f.label :questions %>
+  <div class="controls">
+    <%= f.simple_fields_for :questions do |q| %>
+      <%= q.input_field :content, :style => "margin-bottom: 15px;" %>
+      <%= q.link_to_remove "Remove Question", :class => "btn pull-right", :style => "margin-right: 20px;" %>
+      <%= q.simple_fields_for :answers do |a| %>
+        <%= a.input_field :content, :as => :string, :style => "margin-bottom: 15px; margin-left: 10%; width: 50%;" %>
+        <%= a.input_field :correct, :boolean_style => :inline, :style => "vertical-align: top; position: relative; top: 4px;"%>
+        <%= a.link_to_remove "Remove Answer", :class => "btn pull-right", :style => "margin-right: 20px;" %>
+      <% end%>
+      <%= q.link_to_add "Add answer", :answers, :class => "btn pull-right", :style => "margin-right: 20px;"  %>
+    <% end%>
+    <%= f.link_to_add "Add Question", :questions, :class => "btn" %>
   </div>
   <%= f.input :production_ready, :as => :boolean %>
   <%= f.button :submit, :class => 'btn-primary' %>

@@ -16,6 +16,8 @@
       <dd><%= a.content %><%= " -- Correct" if a.correct %></dd>
     <% end %>
   <% end%>
+  <dt>Created at:</dt>
+  <dd><%= @quiz.created_at %></dd>
 </dl>
 
 <div class="form-actions">
