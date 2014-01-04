@@ -1,0 +1,21 @@
+<%= simple_form_for @quiztory do |f| %>
+  <%= f.error_notification %>
+  
+  <% count = 1 %>
+  <% @quiztory.quiz.questions.order("RANDOM()").each do |question| %>
+  <p class="pull-right" style="font-size: 17px; font-weight: 200; margin-top: 5px; margin-right: 5px;">Question <%= count %></p>
+  <div class="quiz-hero-unit">
+    <p><%= question.content %></p>
+    <p>
+      <% random_answers = question.answers.order("RANDOM()") %>
+      <%= f.input_field :answer_values, as: :radio_buttons, collection: random_answers, 
+            label_method: :content, value_method: :id, name: "quiztory[answer_values][#{question.id}]" %>
+      <input type="radio" value="0" style="visibility: hidden;" name="<%= "quiztory[answer_values][#{question.id}]" %>" 
+          id="quiztory_answer_values_0" class="radio_buttons optional pull-right" checked="checked" boolean_style="inline">
+    </p>
+  </div>
+  <% count += 1 %>
+  <% end %>
+  
+  <%= f.button :submit, "Submit Answers" %>
+<% end %>

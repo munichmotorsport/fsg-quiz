@@ -27,6 +27,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
 
     respond_to do |format|
+      # the second argument of this if statement makes sure there are exactly as many correct answers as there are questions - ergo one per one
       if @quiz.save && (Question.where(quiz_id: @quiz.id).count != Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
         flash.now[:alert] = "Every Question must have exactly one correct answer."
         format.html { render action: 'edit' }
@@ -45,6 +46,7 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1.json
   def update
     respond_to do |format|
+      # same as in create method for the second argument of the if statement
       if @quiz.update(quiz_params) && (Question.where(quiz_id: @quiz.id).count == Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
         format.json { head :no_content }
@@ -75,7 +77,7 @@ class QuizzesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
       params.require(:quiz).permit(
-        :year, 
+        :season, 
         :category,
         :production_ready, 
         :questions_attributes => [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct, :_destroy]]

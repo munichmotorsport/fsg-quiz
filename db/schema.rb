@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102145532) do
+ActiveRecord::Schema.define(version: 20140102213846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 20140102145532) do
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
   create_table "quiztories", force: true do |t|
-    t.time     "finished_at"
+    t.boolean  "finished",       default: false
     t.text     "failed_submits"
+    t.text     "answer_values"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140102145532) do
   add_index "quiztories_users", ["user_id"], name: "index_quiztories_users_on_user_id", using: :btree
 
   create_table "quizzes", force: true do |t|
-    t.date     "year"
+    t.integer  "season"
     t.string   "category"
     t.boolean  "production_ready", default: false
     t.datetime "created_at"
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140102145532) do
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.string   "team"
+    t.datetime "last_seen"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

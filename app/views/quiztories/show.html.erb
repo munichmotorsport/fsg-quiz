@@ -1,19 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Finished at:</strong>
-  <%= @quiztory.finished_at %>
-</p>
-
-<p>
-  <strong>Failed submits:</strong>
-  <%= @quiztory.failed_submits %>
-</p>
-
-<p>
-  <strong>Quiz:</strong>
-  <%= @quiztory.quiz %>
-</p>
-
-<%= link_to 'Edit', edit_quiztory_path(@quiztory) %> |
-<%= link_to 'Back', quiztories_path %>
+<% unless @quiztory.finished %>
+  <% active_quiztories = current_user.quiztories.where(finished: false).empty? %>
+  <%= render 'quizzing' %>
+<% else %>
+  <%= render 'stats' %>
+<% end %>

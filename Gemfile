@@ -44,7 +44,7 @@ gem 'twitter-bootstrap-rails'
 
 # User management... devise, cancan
 gem 'devise'
-gem 'cancan'
+gem 'devise_lastseenable'
 
 # Form magic
 gem 'nested_form'

@@ -6,9 +6,10 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:year) %></th>
+      <th><%= model_class.human_attribute_name(:season) %></th>
       <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:production_ready) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -16,9 +17,10 @@
     <% @quizzes.each do |quiz| %>
       <tr>
         <td><%= link_to quiz.id, quiz_path(quiz) %></td>
-        <td><%= quiz.year %></td>
+        <td><%= quiz.season %></td>
         <td><%= quiz.category %></td>
         <td><%=l quiz.created_at %></td>
+        <td><%= quiz.production_ready.to_s %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_quiz_path(quiz), :class => 'btn btn-mini' %>

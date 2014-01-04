@@ -1,0 +1,17 @@
+<p>
+  <strong>Finished:</strong>
+  <%= @quiztory.finished.to_s %>
+</p>
+
+<p>
+  <strong>Failed submits:</strong>
+  <%= @quiztory.failed_submits %>
+</p>
+
+<p>
+  <strong>Quiz:</strong>
+  <%= @quiztory.quiz %>
+</p>
+
+
+<%= link_to 'Back', quiztories_path %>

@@ -1,7 +1,7 @@
 class CreateQuizzes < ActiveRecord::Migration
   def change
     create_table :quizzes do |t|
-      t.date :year
+      t.integer :season
       t.string :category
       t.boolean :production_ready, :default => false
 

@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Finished at</th>
       <th>Failed submits</th>
       <th>Quiz</th>
@@ -15,9 +16,10 @@
   <tbody>
     <% @quiztories.each do |quiztory| %>
       <tr>
-        <td><%= quiztory.finished_at %></td>
+        <td><%= quiztory.id %></td>
+        <td><%= quiztory.finished.to_s %></td>
         <td><%= quiztory.failed_submits %></td>
-        <td><%= quiztory.quiz %></td>
+        <td><%= quiztory.quiz_id %></td>
         <td><%= link_to 'Show', quiztory %></td>
         <td><%= link_to 'Edit', edit_quiztory_path(quiztory) %></td>
         <td><%= link_to 'Destroy', quiztory, method: :delete, data: { confirm: 'Are you sure?' } %></td>

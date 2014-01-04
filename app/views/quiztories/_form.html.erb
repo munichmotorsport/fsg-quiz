@@ -1,13 +1,8 @@
-<%= simple_form_for(@quiztory) do |f| %>
+<%= simple_form_for quiztory, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.error_notification %>
+  
+  <%= f.association :quiz, as: :radio_buttons, collection: @quiz_collection, label_method: :quiz_attributes, value_method: :id, checked: 1 %>
+  <%= f.association :users, collection: @available_users, label_method: :email, value_method: :id, include_blank: false %>
 
-  <div class="form-inputs">
-    <%= f.input :finished_at %>
-    <%= f.input :failed_submits %>
-    <%= f.association :quiz %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit, "Start!" %>
 <% end %>
