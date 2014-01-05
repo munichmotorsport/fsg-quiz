@@ -27,7 +27,6 @@ class QuiztoriesController < ApplicationController
     @quiztory = Quiztory.new(quiztory_params)
     
     @quiztory.users << current_user
-    @quiztory.answer_values = Array.new(@quiztory.questions.count.times,false)
 
     respond_to do |format|
       if @quiztory.save
@@ -43,7 +42,7 @@ class QuiztoriesController < ApplicationController
   # PATCH/PUT /quiztories/1
   # PATCH/PUT /quiztories/1.json
   def update
-    parbuf = quiztory_params
+    parbuf = submit_params
     parbuf[:finished] = parbuf[:answer_values].all? { |value| value == "true" }
     false_answers = parbuf[:answer_values].select{|v| not v}.size
     
@@ -76,7 +75,11 @@ class QuiztoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiztory_params
-      params["quiztory"]["answer_values"] = params["quiztory"]["answer_values"].values.map do |id|
+      params.require(:quiztory).permit(:quiz_id)
+    end
+    
+    def submit_params
+      params["quiztory"]["answer_values"].values.map! do |id|
         if id.to_i == 0
           false
         else
@@ -84,10 +87,6 @@ class QuiztoriesController < ApplicationController
         end 
       end
       
-      params.require(:quiztory).permit(
-        :failed_submits, 
-        :quiz_id,
-        :answer_values => []
-      )
+      params.require(:quiztory).permit(:answer_values => [])
     end
 end
