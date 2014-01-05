@@ -43,12 +43,13 @@ class QuiztoriesController < ApplicationController
   # PATCH/PUT /quiztories/1.json
   def update
     parbuf = submit_params
-    parbuf[:finished] = parbuf[:answer_values].all? { |value| value == "true" }
+    parbuf[:finished] = parbuf[:answer_values].all?
     false_answers = parbuf[:answer_values].select{|v| not v}.size
     
     respond_to do |format|
       if @quiztory.update(parbuf)
-        format.html { redirect_to @quiztory, alert: "#{false_answers} questions have been answered wrongly (or not at all)." unless @quiztory.finished }
+        format.html { redirect_to @quiztory, alert: "#{false_answers} questions have been answered wrongly (or not at all)." } unless @quiztory.finished
+        format.html { redirect_to @quiztory, notice: "Congrats, you've done it!" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -79,7 +80,7 @@ class QuiztoriesController < ApplicationController
     end
     
     def submit_params
-      params["quiztory"]["answer_values"].values.map! do |id|
+      params["quiztory"]["answer_values"] = params["quiztory"]["answer_values"].values.map do |id|
         if id.to_i == 0
           false
         else
