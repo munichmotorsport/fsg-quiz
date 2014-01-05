@@ -2,7 +2,7 @@
   <%= f.error_notification %>
   
   <%= f.association :quiz, as: :radio_buttons, collection: @quiz_collection, label_method: :quiz_attributes, value_method: :id, checked: 1 %>
-  <%= f.association :users, collection: @available_users, label_method: :email, value_method: :id, include_blank: false %>
+  <%= f.association :users, collection: @available_users, label_method: :email, include_blank: false %>
 
   <%= f.button :submit, "Start!" %>
 <% end %>

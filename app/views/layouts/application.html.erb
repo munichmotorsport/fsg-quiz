@@ -57,8 +57,7 @@
             </ul>
             <ul class="nav pull-right">
                 <% if user_signed_in? %>
-                  <li><a href="#profileModal" data-toggle="modal">Profile</a></li>
-                  <li class="divider-vertical"></li>
+                  <li><a href="#profileModal" data-toggle="modal"><i class="icon-fixed-width icon-cogs"></i> Profile</a></a></li>
                   <li><%= link_to("Logout", destroy_user_session_path, :method=>"delete") %></li> 
                 <% else %>
                   <li><a href="#signupModal" data-toggle="modal">Sign up</a></li>
@@ -110,8 +109,8 @@
         <% elsif @user_active_quiztories.blank? %>
           <%= render :partial => "quiztories/form" %>
         <% else %>
-          <p class="padtext">You have an active quiztory about the quiz from <%= @user_active_quiztories.first.quiz.quiz_attributes %>.</p>
-          <%= link_to "Join Quiztory!", "/quiztories/#{@user_active_quiztories.first.id}", :class => "btn btn-primary btn-large submit", :style => "font-weight: 200;" %>
+          <p class="padtext">You have an active session about the quiz from <%= @user_active_quiztories.first.quiz.quiz_attributes %>.</p>
+          <%= button_to "Join!", "/quiztories/#{@user_active_quiztories.first.id}", :method => :get %>
         <% end %>
       <% end %>
       </div>
@@ -187,7 +186,9 @@
       <%= yield %>
       
       <footer>
-        <p class="text-center">&copy; <%= link_to "municHMotorsport", "http://www.munichmotorsport.de", :target => "munichmotorsport Website" %> 2013</p>
+        <p class="text-center" style="font-size: 14px; font-weight: 200;">
+          &copy; <%= link_to "municHMotorsport", "http://www.munichmotorsport.de", :target => "munichmotorsport Website" %> 2013-2014
+        </p>
       </footer>
 
     </div> <!-- /container -->

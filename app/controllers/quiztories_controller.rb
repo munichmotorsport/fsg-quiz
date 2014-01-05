@@ -24,9 +24,9 @@ class QuiztoriesController < ApplicationController
   # POST /quiztories
   # POST /quiztories.json
   def create
-    @quiztory = Quiztory.new(quiztory_params)
-    
-    @quiztory.users << current_user
+    parbuf = quiztory_params
+    parbuf[:user_ids] << current_user.id
+    @quiztory = Quiztory.new(parbuf)
 
     respond_to do |format|
       if @quiztory.save
@@ -76,7 +76,7 @@ class QuiztoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiztory_params
-      params.require(:quiztory).permit(:quiz_id)
+      params.require(:quiztory).permit(:quiz_id, :user_ids => [])
     end
     
     def submit_params

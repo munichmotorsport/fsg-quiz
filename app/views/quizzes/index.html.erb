@@ -20,7 +20,7 @@
         <td><%= quiz.season %></td>
         <td><%= quiz.category %></td>
         <td><%=l quiz.created_at %></td>
-        <td><%= quiz.production_ready.to_s %></td>
+        <td><%= if quiz.production_ready then "yes" else "no" end %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_quiz_path(quiz), :class => 'btn btn-mini' %>
