@@ -52,7 +52,7 @@ class QuizzesController < ApplicationController
   def update
     parbuf = quiz_params
     
-    if Quiz.find_by season: parbuf[:season], category: parbuf[:category]
+    unless Quiz.find_by(season: parbuf[:season], category: parbuf[:category]).id == @quiz.id
       flash.now[:alert] = "There's another quiz from this season and category."
       render action: 'edit' and return
     end

@@ -6,6 +6,7 @@
       <th>ID</th>
       <th>Finished</th>
       <th>Failed submits</th>
+      <th>Users</th>
       <th>Quiz</th>
       <th></th>
       <th></th>
@@ -19,8 +20,16 @@
         <td><%= quiztory.id %></td>
         <td><%= quiztory.finished.to_s %></td>
         <td><%= quiztory.failed_submits.count %></td>
+        <td>
+          <% quiztory.users.each do |u| %>
+            <%= " " + u.email.split(/@/).first + " " %>
+          <% end %>
+        </td>
         <td><%= quiztory.quiz_id %></td>
-        <td><%= link_to 'Show', quiztory %></td>
+        <td>
+          <%= link_to 'Show', quiztory, :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', quiztory, method: :delete, :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
