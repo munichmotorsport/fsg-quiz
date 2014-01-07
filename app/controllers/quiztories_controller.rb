@@ -25,6 +25,8 @@ class QuiztoriesController < ApplicationController
   # POST /quiztories.json
   def create
     parbuf = quiztory_params
+    redirect_to "/", alert: 'Please choose a quiz.' and return unless parbuf[:quiz_id]
+
     parbuf[:user_ids] << current_user.id
     @quiztory = Quiztory.new(parbuf)
 
@@ -42,13 +44,21 @@ class QuiztoriesController < ApplicationController
   # PATCH/PUT /quiztories/1
   # PATCH/PUT /quiztories/1.json
   def update
+    # store submitted parameters away
     parbuf = submit_params
+    # set attribute "finished" according to the answers received
     parbuf[:finished] = parbuf[:answer_values].all?
+    # count false answers so they can be displayed
     false_answers = parbuf[:answer_values].select{|v| not v}.size
     
     respond_to do |format|
       if @quiztory.update(parbuf)
-        format.html { redirect_to @quiztory, alert: "#{false_answers} questions have been answered wrongly (or not at all)." } unless @quiztory.finished
+        unless @quiztory.finished
+          # here, the failed submits get stored
+          @quiztory.failed_submits.merge!({Time.now => current_user.id})
+          @quiztory.save
+          format.html { redirect_to @quiztory, alert: "#{false_answers} questions have been answered wrongly (or not at all)." }
+        end
         format.html { redirect_to @quiztory, notice: "Congrats, you've done it!" }
         format.json { head :no_content }
       else

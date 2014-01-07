@@ -1,16 +1,20 @@
 <p>
-  <strong>Finished:</strong>
-  <%= @quiztory.finished.to_s %>
+  <strong>Quiz solved: </strong>
+  <%= link_to @quiztory.quiz.quiz_attributes, quiz_path(@quiztory.quiz) %>
 </p>
-
+<p>
+  <strong>Started:</strong>
+  <%= @quiztory.created_at %>
+</p>
 <p>
   <strong>Failed submits:</strong>
-  <%= @quiztory.failed_submits %>
+  <% @quiztory.failed_submits.each do |time,user_id| %>
+    <br /><%=  time.to_s + ": " + User.find(user_id).email %>
+  <% end %>
 </p>
-
 <p>
-  <strong>Quiz:</strong>
-  <%= @quiztory.quiz %>
+  <strong>Finished:</strong>
+  <%= @quiztory.updated_at %>
 </p>
 
 

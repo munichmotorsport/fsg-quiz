@@ -24,7 +24,12 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   # POST /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    parbuf = quiz_params
+    
+    matching_quiz = Quiz.find_by season: parbuf[:season], category: parbuf[:category]
+    redirect_to quiz_path(matching_quiz), notice: "This Quiz exists already. Feel free to edit it." and return if matching_quiz
+    
+    @quiz = Quiz.new(parbuf)
 
     respond_to do |format|
       # the second argument of this if statement makes sure there are exactly as many correct answers as there are questions - ergo one per one

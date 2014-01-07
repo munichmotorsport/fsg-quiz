@@ -1,10 +1,10 @@
 <h1>Listing quiztories</h1>
 
-<table>
+<table style="width: 100%;">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Finished at</th>
+      <th>Finished</th>
       <th>Failed submits</th>
       <th>Quiz</th>
       <th></th>
@@ -15,19 +15,14 @@
 
   <tbody>
     <% @quiztories.each do |quiztory| %>
-      <tr>
+      <tr style="text-align: center;">
         <td><%= quiztory.id %></td>
         <td><%= quiztory.finished.to_s %></td>
-        <td><%= quiztory.failed_submits %></td>
+        <td><%= quiztory.failed_submits.count %></td>
         <td><%= quiztory.quiz_id %></td>
         <td><%= link_to 'Show', quiztory %></td>
-        <td><%= link_to 'Edit', edit_quiztory_path(quiztory) %></td>
-        <td><%= link_to 'Destroy', quiztory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Quiztory', new_quiztory_path %>
+<br />

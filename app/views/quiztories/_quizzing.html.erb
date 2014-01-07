@@ -1,3 +1,4 @@
+<p id="someTag"></p>
 <%= simple_form_for @quiztory do |f| %>
   <%= f.error_notification %>
   
@@ -17,5 +18,5 @@
   <% count += 1 %>
   <% end %>
   
-  <%= f.button :submit, "Submit Answers" %>
+  <input type="submit" value="Submit Answers" name="commit" id="submitBtn" class="btn" data-delay="<%=j @quiztory.submit_delay(current_user.id).to_s %>"></input>
 <% end %>
