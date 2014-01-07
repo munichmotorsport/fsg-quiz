@@ -44,6 +44,8 @@ class QuiztoriesController < ApplicationController
   # PATCH/PUT /quiztories/1
   # PATCH/PUT /quiztories/1.json
   def update
+    # redirect to the show view if another user has finished the quiztory already
+    redirect_to @quiztory and return if @quiztory.finished
     # store submitted parameters away
     parbuf = submit_params
     # set attribute "finished" according to the answers received
@@ -59,7 +61,9 @@ class QuiztoriesController < ApplicationController
           @quiztory.save
           format.html { redirect_to @quiztory, alert: "#{false_answers} questions have been answered wrongly (or not at all)." }
         end
-        format.html { redirect_to @quiztory, notice: "Congrats, you've done it!" }
+        
+        min, sec = @quiztory.duration
+        format.html { redirect_to @quiztory, notice: "Congrats, you've done it! It took you #{min} minutes and #{sec} seconds." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

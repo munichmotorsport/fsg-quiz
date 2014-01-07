@@ -50,9 +50,16 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1
   # PATCH/PUT /quizzes/1.json
   def update
+    parbuf = quiz_params
+    
+    if Quiz.find_by season: parbuf[:season], category: parbuf[:category]
+      flash.now[:alert] = "There's another quiz from this season and category."
+      render action: 'edit' and return
+    end
+    
     respond_to do |format|
       # same as in create method for the second argument of the if statement
-      if @quiz.update(quiz_params) && (Question.where(quiz_id: @quiz.id).count == Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
+      if @quiz.update(parbuf) && (Question.where(quiz_id: @quiz.id).count == Answer.where(question_id: Question.where(quiz_id: @quiz.id).to_a.map{|q| q.id}).where(correct: true).count)
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
         format.json { head :no_content }
       else

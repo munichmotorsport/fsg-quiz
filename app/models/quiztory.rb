@@ -8,22 +8,27 @@ class Quiztory < ActiveRecord::Base
   serialize :answer_values, Array
   
   def submit_delay user_id
-    time_difference = Time.now - self.updated_at
-    delay = 30.0 - time_difference
-    
-    
     unless (submits = self.failed_submits).empty?
       unless (user_submits = submits.select{ |k,v| v == user_id }).empty?
         last_user_submit = user_submits.keys.last
         time_delta = Time.now - last_user_submit
-        delay = 30.0 - time_delta
-        
-        delay.round
+        if (delay = 30.0 - time_delta) > 0.0
+          delay.round
+        else
+          0
+        end
       else
         0
       end
     else
       0
     end
+  end
+  
+  def duration
+    duration_sec = self.updated_at - self.created_at
+    duration_min = (duration_sec / 60).to_i
+    duration_sec = (duration_sec % 60).to_i
+    [duration_min, duration_sec]
   end
 end
