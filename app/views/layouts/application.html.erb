@@ -109,7 +109,7 @@
         <% elsif @user_active_quiztories.blank? %>
           <%= render :partial => "quiztories/form" %>
         <% else %>
-          <p class="padtext">You have an active session about the quiz from <%= @user_active_quiztories.first.quiz.quiz_attributes %>.</p>
+          <p class="padtext">You have an active session about the quiz from <%= @user_active_quiztories.last.quiz.quiz_attributes %>.</p>
           <%= button_to "Join!", "/quiztories/#{@user_active_quiztories.first.id}", :method => :get %>
         <% end %>
       <% end %>
