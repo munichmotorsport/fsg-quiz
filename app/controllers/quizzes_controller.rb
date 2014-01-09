@@ -53,7 +53,7 @@ class QuizzesController < ApplicationController
     parbuf = quiz_params
     
     matching_quiz = Quiz.find_by season: parbuf[:season], category: parbuf[:category]
-    unless not matching_quiz && matching_quiz.id == @quiz.id
+    if matching_quiz && matching_quiz.id != @quiz.id
       flash.now[:alert] = "There's another quiz from this season and category."
       render action: 'edit' and return
     end
