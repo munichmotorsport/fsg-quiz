@@ -4,9 +4,9 @@
   
   <% count = 1 %>
   <% @quiztory.quiz.questions.order("RANDOM()").each do |question| %>
-  <p class="pull-right" style="font-size: 17px; font-weight: 200; margin-top: 5px; margin-right: 5px;">Question <%= count %></p>
+  <p class="pull-right" style="font-size: 14px; font-weight: 200; margin-top: 5px; margin-right: 5px;">Question <%= count %></p>
   <div class="quiz-hero-unit">
-    <p><%= question.content %></p>
+    <p style="font-size: 14px; font-weight: 400; line-height: 17px;"><strong><%= question.content %></strong></p>
     <p>
       <% random_answers = question.answers.order("RANDOM()") %>
       <%= f.input_field :answer_values, as: :radio_buttons, collection: random_answers, 
