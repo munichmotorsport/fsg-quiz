@@ -48,7 +48,11 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if user_signed_in? %>
-                <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
+                <% if @user_active_quiztories.blank? %>
+                  <li><a href="#quizModal" data-toggle="modal">Take Quiz</a></li>
+                <% else %>
+                  <li><a href="#quizModal" data-toggle="modal">Join or Exit Quiz Session</a></li>
+                <% end %>
                 <% if current_user.admin %>
                   <li><%= link_to "Create Quiz", "/quizzes/new" %></li>
                   <li><%= link_to "All Quizzes", "/quizzes" %></li>
@@ -105,12 +109,14 @@
       <div class="modal-body">
       <% if user_signed_in? %>
         <% if @quiz_collection.blank? %>
-          <% flash.now[:alert] = "Sorry, no quizzes available right now."  %>        
+          <% flash.now[:alert] = "Sorry, no quizzes available right now."  %>
         <% elsif @user_active_quiztories.blank? %>
           <%= render :partial => "quiztories/form" %>
         <% else %>
           <p class="padtext">You have an active session about the quiz from <%= @user_active_quiztories.last.quiz.quiz_attributes %>.</p>
           <%= button_to "Join!", "/quiztories/#{@user_active_quiztories.first.id}", :method => :get %>
+          <p class="padtext">Ending it will delete the session for you and your session mates.</p>
+          <%= button_to 'Delete', "/quiztories/#{@user_active_quiztories.first.id}", :method => :delete %>
         <% end %>
       <% end %>
       </div>

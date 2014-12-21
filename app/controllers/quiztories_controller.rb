@@ -32,7 +32,7 @@ class QuiztoriesController < ApplicationController
 
     respond_to do |format|
       if @quiztory.save
-        format.html { redirect_to @quiztory, notice: 'Go go go!' }
+        format.html { redirect_to @quiztory, notice: "Go go go!" }
         format.json { render action: 'show', status: :created, location: @quiztory }
       else
         format.html { render action: 'new' }
@@ -77,7 +77,7 @@ class QuiztoriesController < ApplicationController
   def destroy
     @quiztory.destroy
     respond_to do |format|
-      format.html { redirect_to quiztories_url }
+      format.html { redirect_to root_path, alert: "Deleted your quiz session." }
       format.json { head :no_content }
     end
   end
