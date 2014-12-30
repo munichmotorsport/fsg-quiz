@@ -7,7 +7,7 @@
 * more than one person at a time can solve a quiz (or, to be more specific: all three team captains)
 * it's also visually imitating the dimensions of the original quiz (60% of viewport in use, font sizes etc.)
 
-`fsg-quiz` is a Ruby on Rails application. Our version uses a PostgreSQL database, since it's being deployed via heroku (it's reachable [here](http://fsg-quiz.herokuapp.com "FSG-Quiz by munichmotorsport")), but you can at anytime use it with any other database that is supported by Active::Record. We're not using any database specific stuff right now and are not planning on it in the future; if that ever changes, it will be announced in this README.
+`fsg-quiz` is a Ruby on Rails application. Our version uses a PostgreSQL database, since it's being deployed via heroku (it's reachable [here](http://fsg-quiz.herokuapp.com, "FSG-Quiz by munichmotorsport")), but you can at anytime use it with any other database that is supported by Active::Record. We're not using any database specific stuff right now and are not planning on it in the future; if that ever changes, it will be announced in this README.
 
 ## How to get it up and running
 
@@ -26,3 +26,20 @@ db:migrate` in the application directory) and then starting the app via `rails s
 * all views need to be checked for accessibility; atm, pretty much anyone can do anything if they know the link
 * the possibilities of devise need to be exploited better; everything that's not automagically done by devise is pretty crude right now, that needs to change (and we want to grant omniauth access via facebook etc. as well)
 * there's MUCH to do still in terms of making everything more beautiful and/or more like the original FSG quiz
+
+### To Do Checklist
+
+* 3 users max per quiztory: **IN PROGRESS**
+* no users selection when no users present: **IN PROGRESS**
+* list other users if session is in progress: **NEW**
+* show when session has been started if in progress: **NEW**
+* user can't create quiztory if already in progress, even if using the browser's back function: **NEW**
+* team variable used: **NEW**
+* quiztories only for members of same team: **NEW**
+* tidy all views' accessibility: **NEW**
+* delete button needs to be red: **NEW**
+* *All Quizzes* view wants to be more beautiful: **NEW**
+* only one new entry per click in new or edit view: **NEW**
+* create *My Quiz Sessions* view for users: **NEW**
+* create a nice statistics page for that view (*My Quiz Sessions*): **NEW**
+* use other web server (nginx?): **NEW**                                                                      
