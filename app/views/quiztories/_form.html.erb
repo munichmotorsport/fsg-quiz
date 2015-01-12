@@ -2,7 +2,9 @@
   <%= f.error_notification %>
   
   <%= f.association :quiz, as: :radio_buttons, collection: @quiz_collection, label_method: :quiz_attributes, value_method: :id, checked: Quiz.first.id %>
-  <%= f.association :users, collection: @available_users, label_method: :email, include_blank: false %>
-
+  <%= if !(@available_users.blank?) then (f.association :users, collection: @available_users, label_method: :email, include_blank: false) 
+	else (f.association :users, collection: @available_users, label_method: :email, include_blank: false || "Currently no user available")
+  end%>
+  
   <%= f.button :submit, "Start!" %>
 <% end %>
