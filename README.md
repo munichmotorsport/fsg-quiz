@@ -12,7 +12,7 @@
 ## How to get it up and running
 
 If you don't want to use [our version](http://fsg-quiz.herokuapp.com, "FSG-Quiz by munichmotorsport"), you can set up the app yourself whereever you want. It's a pretty standard Rails app, so you should be good with cloning the repository to the machine to want to run from, creating and migrating the database (with postgre, you will need to `createuser -dlrs --replication fsg-quiz` in a terminal first - see postgre documentation for explanation - and then run `rake db:create` and `rake
-db:migrate` in the application directory) and then starting the app via `rails server` (again, in the application directory). This will start a WEBrick webserver that serves the app. If you want to run the app differently, please see the documentation of you webserver etc to find out how to deploy a Ruby on Rails app there. You can also find everything on how to deploy with production settings in the Rails documentation etc. 
+db:migrate` in the application directory) and then starting the app via `rails server` (again, in the application directory). This will start a WEBrick webserver that serves the app. If you want to run the app differently, please see the documentation of you webserver etc to find out how to deploy a Ruby on Rails app there. You can also find everything on how to deploy with production settings in the Rails documentation etc.
 
 ## Technicalities
 
@@ -29,9 +29,6 @@ db:migrate` in the application directory) and then starting the app via `rails s
 
 ### To Do Checklist
 
-* 3 users max per quiztory: **IN PROGRESS**
-* no users selection when no users present: **IN PROGRESS**
-* list other users if session is in progress: **NEW**
 * show when session has been started if in progress: **NEW**
 * user can't create quiztory if already in progress, even if using the browser's back function: **NEW**
 * team variable used: **NEW**
@@ -42,4 +39,4 @@ db:migrate` in the application directory) and then starting the app via `rails s
 * only one new entry per click in new or edit view: **NEW**
 * create *My Quiz Sessions* view for users: **NEW**
 * create a nice statistics page for that view (*My Quiz Sessions*): **NEW**
-* use other web server (nginx?): **NEW**                                                                      
+* use other web server (nginx?): **NEW**

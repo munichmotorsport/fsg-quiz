@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
@@ -35,7 +35,7 @@ end
 
 # ------------------- customization -------------------
 # Heroku
-gem 'rails_12factor', group: :production 
+gem 'rails_12factor', group: :production
 
 # Twitter Bootstrap Rails
 gem 'therubyracer'
